@@ -144,3 +144,54 @@ class ToastBread(IToastable):
     def __init__(self,ingredients: Topping | list):
         self.__state = ToastBreadState.LIST if isinstance(ingredients,list) else ToastBreadState.LINKED_LIST
         self.__ingredients : Topping | list = ingredients
+
+    def setToast(self):
+        match self.__state:
+            case ToastBreadState.LIST:
+                return self.__set_toast_list
+            case ToastBreadState.LINKED_LIST:
+                return self.__set_toast_linked_list
+            case _ :
+                raise ValueError("Undefined State")
+    
+    def __set_toast_linked_list(self):
+        # set head of llist with self
+        pass
+
+    def __set_toast_list(self):
+        # set ingredients
+        pass
+
+    def overlook(self):
+        match self.__state:
+            case ToastBreadState.LIST:
+                return self.__overlook_list
+            case ToastBreadState.LINKED_LIST:
+                return self.__overlook_linked_list
+            case _ :
+                raise ValueError("Undefined State")
+            
+    def __overlook_list(self):
+        # get names as str list with toast bread
+        pass
+    
+    def __overlook_linked_list(self):
+        # get names as str list with toast bread
+        pass
+
+    def __reach_next(self):
+        match self.__state:
+            case ToastBreadState.LIST:
+                return self.__reach_next_list
+            case ToastBreadState.LINKED_LIST:
+                return self.__reach_next_linked_list
+            case _ :
+                raise ValueError("Undefined State")
+            
+    def __reach_next_list(self):
+        # return next element with yield
+        pass
+    
+    def __reach_next_linked_list(self):
+        # return next node with yield
+        pass
