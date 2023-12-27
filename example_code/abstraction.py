@@ -246,7 +246,7 @@ class Custom(Topping, ABC, metaclass=NoPublicConstructor):
         raise NotImplementedError
 
 
-class ICuttable(type, metaclass=ABCMeta):
+class ICuttable(Topping, metaclass=ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
         return (
@@ -292,7 +292,7 @@ class ICuttable(type, metaclass=ABCMeta):
         return super().__call__(*args, **kwargs)  # type: ignore
 
 
-class Sausage(Topping, ABC, metaclass=ICuttable):
+class Sausage(ICuttable, ABC, metaclass=ICuttable):
     def __init__(self, next: Topping):
         super(Topping, self).__init__(next)
         ABC.__init__(Sausage, self)
@@ -328,7 +328,7 @@ class Sausage(Topping, ABC, metaclass=ICuttable):
         raise NotImplementedError
 
 
-class Cheese(Topping, ABC, metaclass=ICuttable):
+class Cheese(ICuttable, ABC, metaclass=ICuttable):
     def __init__(self, next: Topping):
         super(Topping, self).__init__(next)
         ABC.__init__(Cheese, self)
@@ -369,7 +369,7 @@ class Cheese(Topping, ABC, metaclass=ICuttable):
         raise NotImplementedError
 
 
-class Tomato(Topping, ABC, metaclass=ICuttable):
+class Tomato(ICuttable, ABC, metaclass=ICuttable):
     def __init__(self, next: Topping):
         super(Topping, self).__init__(next)
         ABC.__init__(Tomato, self)
@@ -410,7 +410,7 @@ class Tomato(Topping, ABC, metaclass=ICuttable):
         raise NotImplementedError
 
 
-class Salad(Topping, ABC, metaclass=ICuttable):
+class Salad(ICuttable, ABC, metaclass=ICuttable):
     def __init__(self, next: Topping):
         super(Topping, self).__init__(next)
         ABC.__init__(Salad, self)
@@ -452,7 +452,7 @@ class Salad(Topping, ABC, metaclass=ICuttable):
         raise NotImplementedError
 
 
-class IPourlable(type, metaclass=ABCMeta):
+class IPourlable(Topping, metaclass=ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
         return (
@@ -485,7 +485,7 @@ class IPourlable(type, metaclass=ABCMeta):
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
 
-class Sauce(Topping,ABC, metaclass=IPourlable):
+class Sauce(IPourlable,ABC, metaclass=IPourlable):
 
     def __init__(self, next: Topping) -> None:
         super(Topping,self).__init__(next)
