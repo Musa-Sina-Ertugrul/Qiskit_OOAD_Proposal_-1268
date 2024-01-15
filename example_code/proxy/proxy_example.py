@@ -45,7 +45,3 @@ class DataContainer:
 if __name__ == "__main__":
     data = DataContainer("Hello")
     print(data)
-                
-                
-                 
-
