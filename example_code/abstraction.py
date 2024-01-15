@@ -98,7 +98,7 @@ class Topping(ABC, metaclass=IToastableWithNoPublicConstructor):
             def __init__(self):
                 self.__Prototypes: dict = {} # add predefined objects
 
-            def add_prototype(self, name: str, prototype: "Topping"):
+            def add_prototype(self, name: str, prototype: "Topping") -> None:
                 if self.__Prototypes.get(name, False):
                     return
                 self.__Prototypes[name] = prototype
