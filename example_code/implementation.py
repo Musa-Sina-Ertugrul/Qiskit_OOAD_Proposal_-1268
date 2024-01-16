@@ -1,13 +1,13 @@
-from abstraction import Salad,Sauce,Sausage,Cheese,Tomato, NoPublicConstructor
-from abc import ABC,ABCMeta,abstractmethod
+from abstraction import Salad, Sauce, Sausage, Cheese, Tomato, NoPublicConstructor
+from abc import ABC, ABCMeta, abstractmethod
 from typing import Type, Any, TypeVar
 
 from example_code.abstraction import Topping
 
 T = TypeVar("T")
 
-class ColourfulSausage(Sausage,metaclass=ABCMeta):
 
+class ColourfulSausage(Sausage, metaclass=ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
         return (
@@ -15,7 +15,7 @@ class ColourfulSausage(Sausage,metaclass=ABCMeta):
             and callable(subclass.make_more_red)
             or NotImplemented
         )
-    
+
     def __call__(cls, *args, **kwargs):
         raise TypeError(
             f"{cls.__module__}.{cls.__qualname__} has no public constructor"
@@ -24,8 +24,8 @@ class ColourfulSausage(Sausage,metaclass=ABCMeta):
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
 
-class PaleSausage(Sausage,metaclass=ABCMeta):
 
+class PaleSausage(Sausage, metaclass=ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
         return (
@@ -33,7 +33,7 @@ class PaleSausage(Sausage,metaclass=ABCMeta):
             and callable(subclass.make_more_pale)
             or NotImplemented
         )
-    
+
     def __call__(cls, *args, **kwargs):
         raise TypeError(
             f"{cls.__module__}.{cls.__qualname__} has no public constructor"
@@ -41,27 +41,25 @@ class PaleSausage(Sausage,metaclass=ABCMeta):
 
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
-    
-class GermanSausage(ColourfulSausage):
 
+
+class GermanSausage(ColourfulSausage):
     def __init__(self, next: Topping):
         super().__init__(next)
-
 
     def make_more_red(self):
         pass
 
-class PolishSausage(PaleSausage):
 
+class PolishSausage(PaleSausage):
     def __init__(self, next: Topping):
         super().__init__(next)
-
 
     def make_more_pale(self):
         pass
 
-class BadSmellCheese(Cheese,metaclass=ABCMeta):
 
+class BadSmellCheese(Cheese, metaclass=ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
         return (
@@ -69,7 +67,7 @@ class BadSmellCheese(Cheese,metaclass=ABCMeta):
             and callable(subclass.cover_smell)
             or NotImplemented
         )
-    
+
     def __call__(cls, *args, **kwargs):
         raise TypeError(
             f"{cls.__module__}.{cls.__qualname__} has no public constructor"
@@ -78,8 +76,8 @@ class BadSmellCheese(Cheese,metaclass=ABCMeta):
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
 
-class GoodSmellCheese(Cheese,metaclass=ABCMeta):
 
+class GoodSmellCheese(Cheese, metaclass=ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
         return (
@@ -87,7 +85,7 @@ class GoodSmellCheese(Cheese,metaclass=ABCMeta):
             and callable(subclass.make_more_smelly)
             or NotImplemented
         )
-    
+
     def __call__(cls, *args, **kwargs):
         raise TypeError(
             f"{cls.__module__}.{cls.__qualname__} has no public constructor"
@@ -95,25 +93,25 @@ class GoodSmellCheese(Cheese,metaclass=ABCMeta):
 
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
-    
-class HollandCheese(BadSmellCheese):
 
+
+class HollandCheese(BadSmellCheese):
     def __init__(self, next: Topping):
         super().__init__(next)
 
     def cover_smell(self):
         pass
 
-class ItalianCheese(GoodSmellCheese):
 
+class ItalianCheese(GoodSmellCheese):
     def __init__(self, next: Topping):
         super().__init__(next)
 
     def make_more_smelly(self):
         pass
 
-class FarmTomato(Tomato,metaclass=ABCMeta):
 
+class FarmTomato(Tomato, metaclass=ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
         return (
@@ -121,7 +119,7 @@ class FarmTomato(Tomato,metaclass=ABCMeta):
             and callable(subclass.dry_sun)
             or NotImplemented
         )
-    
+
     def __call__(cls, *args, **kwargs):
         raise TypeError(
             f"{cls.__module__}.{cls.__qualname__} has no public constructor"
@@ -130,8 +128,8 @@ class FarmTomato(Tomato,metaclass=ABCMeta):
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
 
-class GreenHouseTomato(Tomato,metaclass=ABCMeta):
 
+class GreenHouseTomato(Tomato, metaclass=ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
         return (
@@ -139,7 +137,7 @@ class GreenHouseTomato(Tomato,metaclass=ABCMeta):
             and callable(subclass.dry_oven)
             or NotImplemented
         )
-    
+
     def __call__(cls, *args, **kwargs):
         raise TypeError(
             f"{cls.__module__}.{cls.__qualname__} has no public constructor"
@@ -147,9 +145,9 @@ class GreenHouseTomato(Tomato,metaclass=ABCMeta):
 
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
-    
-class BigTomato(FarmTomato):
 
+
+class BigTomato(FarmTomato):
     def __init__(self, next: Topping):
         super().__init__(next)
 
@@ -160,8 +158,8 @@ class BigTomato(FarmTomato):
     def dry_sun(self):
         pass
 
-class CherryTomato(GreenHouseTomato):
 
+class CherryTomato(GreenHouseTomato):
     def __init__(self, next: Topping):
         super().__init__(next)
 
@@ -172,8 +170,8 @@ class CherryTomato(GreenHouseTomato):
     def dry_oven(self):
         pass
 
-class MilkBasedSauce(Sauce,metaclass=ABCMeta):
 
+class MilkBasedSauce(Sauce, metaclass=ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
         return (
@@ -181,7 +179,7 @@ class MilkBasedSauce(Sauce,metaclass=ABCMeta):
             and callable(subclass.pour_milk)
             or NotImplemented
         )
-    
+
     def __call__(cls, *args, **kwargs):
         raise TypeError(
             f"{cls.__module__}.{cls.__qualname__} has no public constructor"
@@ -190,8 +188,8 @@ class MilkBasedSauce(Sauce,metaclass=ABCMeta):
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
 
-class TomatoBasedSauce(Sauce,metaclass=ABCMeta):
 
+class TomatoBasedSauce(Sauce, metaclass=ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
         return (
@@ -199,7 +197,7 @@ class TomatoBasedSauce(Sauce,metaclass=ABCMeta):
             and callable(subclass.pour_tomato)
             or NotImplemented
         )
-    
+
     def __call__(cls, *args, **kwargs):
         raise TypeError(
             f"{cls.__module__}.{cls.__qualname__} has no public constructor"
@@ -208,8 +206,8 @@ class TomatoBasedSauce(Sauce,metaclass=ABCMeta):
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
 
-class MayoSauce(MilkBasedSauce):
 
+class MayoSauce(MilkBasedSauce):
     def __init__(self, next: Topping) -> None:
         super().__init__(next)
 
@@ -220,8 +218,8 @@ class MayoSauce(MilkBasedSauce):
         self.pour_milk()
         super().pour()
 
-class Ketchup(TomatoBasedSauce):
 
+class Ketchup(TomatoBasedSauce):
     def __init__(self, next: Topping) -> None:
         super().__init__(next)
 
@@ -232,8 +230,8 @@ class Ketchup(TomatoBasedSauce):
         self.pour_tomato()
         super().pour()
 
-class RefreshingSalad(Salad,metaclass=ABCMeta):
 
+class RefreshingSalad(Salad, metaclass=ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
         return (
@@ -241,7 +239,7 @@ class RefreshingSalad(Salad,metaclass=ABCMeta):
             and callable(subclass.mix_herbs)
             or NotImplemented
         )
-    
+
     def __call__(cls, *args, **kwargs):
         raise TypeError(
             f"{cls.__module__}.{cls.__qualname__} has no public constructor"
@@ -250,8 +248,8 @@ class RefreshingSalad(Salad,metaclass=ABCMeta):
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
 
-class FishwSalad(Salad,metaclass=ABCMeta):
 
+class FishwSalad(Salad, metaclass=ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
         return (
@@ -261,7 +259,7 @@ class FishwSalad(Salad,metaclass=ABCMeta):
             and callable(subclass.mix_herbs_fish)
             or NotImplemented
         )
-    
+
     def __call__(cls, *args, **kwargs):
         raise TypeError(
             f"{cls.__module__}.{cls.__qualname__} has no public constructor"
@@ -270,8 +268,8 @@ class FishwSalad(Salad,metaclass=ABCMeta):
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
 
-class WhiteSeaSalad(RefreshingSalad):
 
+class WhiteSeaSalad(RefreshingSalad):
     def __init__(self, next: Topping):
         super().__init__(next)
 
@@ -282,8 +280,8 @@ class WhiteSeaSalad(RefreshingSalad):
         self.mix_herbs()
         super().mix()
 
-class TunaSalad(FishwSalad):
 
+class TunaSalad(FishwSalad):
     def __init__(self, next: Topping):
         super().__init__(next)
 
@@ -293,7 +291,7 @@ class TunaSalad(FishwSalad):
     def mix(self):
         self.mix_herbs_fish()
         super().mix()
-    
+
     def cut_fish(self):
         pass
 

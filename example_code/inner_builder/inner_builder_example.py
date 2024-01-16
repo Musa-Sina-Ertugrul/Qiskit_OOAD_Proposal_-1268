@@ -1,77 +1,76 @@
 from copy import deepcopy
-from typing import TypeVar,Type,Any
+from typing import Optional, TypeVar, Type, Any, Generic, ForwardRef, TypedDict
+from dataclasses import dataclass, field
+from abc import ABC
+from pydantic import BaseModel
 
 T = TypeVar("T")
 
+from typing import Type, Optional
+
+
 class NoPublicConstructor(type):
-    """Metaclass that ensures a private constructor
-
-    If a class uses this metaclass like this:
-
-        class SomeClass(metaclass=NoPublicConstructor):
-            pass
-
-    If you try to instantiate your class (`SomeClass()`),
-    a `TypeError` will be thrown.
-    """
-
     def __call__(cls, *args, **kwargs):
-        raise TypeError(
-            f"{cls.__module__}.{cls.__qualname__} has no public constructor"
-        )
+        raise TypeError(f"{cls.__name__} cannot be instantiated directly")
 
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
 
 
-class B(metaclass=NoPublicConstructor):
-    
-    def __init__(self) -> None:
-        pass
-    
-    def __str__(self) -> str:
-        return "class B"
-
 class A(metaclass=NoPublicConstructor):
-
     class __Builder:
-            Prototypes: dict = {
-                "B" : B._create()
-            } # add predefined objects
-            def __init__(self) -> None:
-                if not "B" in self.Prototypes:
-                    B._create()
+        __Prototypes: dict = {"B": None, "C": None}
 
-            def add_prototype(self, name: str, prototype: "Topping") -> None:
-                if self.__Prototypes.get(name, False):
-                    return
-                self.__Prototypes[name] = prototype
+        def __init__(self) -> None:
+            pass
 
-            def get_prototype(self, name: str) -> "Topping":
-                try:
-                    return deepcopy(self.Prototypes[name])
-                except ValueError:
-                    raise "wrong key"
+        def add_prototype(self, name: str, prototype: Type["A"]) -> None:
+            if self.__Prototypes.get(name, False):
+                return
+            self.__Prototypes[name] = prototype
 
-            def get_prototype_list(self, names: list) -> list:
-                result: list = []
+        def get_prototype(self, name: str) -> "A":
+            try:
+                return self.__Prototypes[name]._create()
+            except ValueError:
+                raise ValueError("wrong key")
 
-                for name in names:
-                    result.append(self.get_prototype(name))
+    __InnerBuilder = __Builder()
 
-                for i in range(len(result) - 1):
-                    result[i].__set_next = result[i + 1].next
+    def __init__(self, next_: Type["A"] = None, prev: Type["A"] = None) -> None:
+        self.__next: Optional[Type["A"]] = next_
+        self.previous: Optional[Type["A"]] = prev
 
-                return result
-
-    __Builder = __Builder()
-
-    def __init__(self) -> None:
-        self.builder = self.__Builder
+    def next(self, cls_name: str) -> None:
+        self.__next = self.__InnerBuilder.get_prototype(cls_name)
+        self.__next.previous = self
+        return self.__next
 
     @classmethod
-    def build(cls,cls_name : str) -> Any:
-        return cls._create().builder.get_prototype(cls_name)
+    def build(cls, cls_name: str) -> "A":
+        return cls.__InnerBuilder.get_prototype(cls_name)
+
+    def __str__(self) -> str:
+        return f"class {self.__class__.__name__} {self.previous}"
+
+    @classmethod
+    def add_prototype(cls, added_cls):
+        cls.__InnerBuilder.add_prototype(added_cls.__name__, added_cls)
+
+
+class B(A):
+    def __init__(self, next_: type[A] = None, prev: Type["A"] = None) -> None:
+        super().__init__(next_, prev)
+
+
+class C(A):
+    def __init__(self, next_: type[A] = None, prev: Type["A"] = None) -> None:
+        super().__init__(next_, prev)
+
+
+A.add_prototype(B)
+A.add_prototype(C)
 
 if __name__ == "__main__":
-    print(A.build("B"))
+    var = A.build("B").next("C").next("B")
+    print(var)

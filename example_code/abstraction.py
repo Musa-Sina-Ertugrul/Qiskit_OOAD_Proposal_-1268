@@ -96,7 +96,7 @@ class Topping(ABC, metaclass=IToastableWithNoPublicConstructor):
         @singleton
         class ToppingBuilder:
             def __init__(self):
-                self.__Prototypes: dict = {} # add predefined objects
+                self.__Prototypes: dict = {}  # add predefined objects
 
             def add_prototype(self, name: str, prototype: "Topping") -> None:
                 if self.__Prototypes.get(name, False):
@@ -485,20 +485,20 @@ class IPourlable(Topping, metaclass=ABCMeta):
     def _create(cls: Type[T], *args: Any, **kwargs: Any) -> T:
         return super().__call__(*args, **kwargs)  # type: ignore
 
-class Sauce(IPourlable,ABC, metaclass=IPourlable):
 
+class Sauce(IPourlable, ABC, metaclass=IPourlable):
     def __init__(self, next: Topping) -> None:
-        super(Topping,self).__init__(next)
+        super(Topping, self).__init__(next)
         ABC.__init__(Sauce, self)
 
     def bite(self):
         self.pour()
         self.bite_small()
-    
+
     def bootstrap(self):
         self.add_water()
         self.mix()
-    
+
     def add_water(self):
         pass
 
