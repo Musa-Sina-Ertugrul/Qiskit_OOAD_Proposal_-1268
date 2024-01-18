@@ -1,8 +1,8 @@
-from abstraction import Salad, Sauce, Sausage, Cheese, Tomato, NoPublicConstructor
+from example_code.bridge.abstraction import Salad, Sauce, Sausage, Cheese, Tomato, NoPublicConstructor
 from abc import ABC, ABCMeta, abstractmethod
 from typing import Type, Any, TypeVar
 
-from example_code.abstraction import Topping
+from example_code.bridge.abstraction import Topping
 
 T = TypeVar("T")
 
