@@ -11,7 +11,7 @@ class ParentB:
    def greet(self) -> None:
       print("Hello World")
 
-def get_my_code(base) -> Type["MyCode"]:
+def wrapper(base) -> Type["MyCode"]:
 
     class MyCode(base):
 
@@ -26,5 +26,5 @@ def get_my_code(base) -> Type["MyCode"]:
     return MyCode
 
 if __name__ == "__main__":
-    dummy: Type["MyCode"] = get_my_code(ParentA)()
+    dummy: Type["MyCode"] = wrapper(ParentA)()
     dummy.talk()
