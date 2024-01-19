@@ -26,5 +26,5 @@ def wrapper(base) -> Type["MyCode"]:
 
 
 if __name__ == "__main__":
-    dummy: Type["MyCode"] = wrapper(ParentA)()
+    dummy: Type["MyCode"] = wrapper(ParentB)()
     dummy.talk()
