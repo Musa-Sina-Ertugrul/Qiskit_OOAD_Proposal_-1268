@@ -10,7 +10,7 @@
 <br>
 
 <p align="center">
-<img src="https://github.com/Musa-Sina-Ertugrul/Qiskit_OOAD_Proposal_RFC0014/assets/102359522/90669ecd-eaca-4724-b97c-d98a7fb67aa6">
+<img width="250px" height="250px" src="https://github.com/Musa-Sina-Ertugrul/Qiskit_OOAD_Proposal_RFC0014/assets/102359522/90669ecd-eaca-4724-b97c-d98a7fb67aa6">
 </p>
 
 <h5>About Me ( M.Sina Ertugrul ) </h5>
