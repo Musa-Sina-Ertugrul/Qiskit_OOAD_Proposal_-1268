@@ -1,9 +1,17 @@
 <h1 align="center">Quick Covering Tool</h1>
 
+<br>
+
 |             | Authors         | Contact                        |
 |-------------|-----------------|-------------------------|
 | Author:     | M.Sina Ertugrul | m.s.ertugrul@gmail.com  |
 | Supervisor: | Naoki Kanazawa  | nkanazawa1989@gmail.com |
+
+<br>
+
+<p align="center">
+<img src="https://github.com/Musa-Sina-Ertugrul/Qiskit_OOAD_Proposal_RFC0014/assets/102359522/90669ecd-eaca-4724-b97c-d98a7fb67aa6">
+</p>
 
 <h5>About Me ( M.Sina Ertugrul ) </h5>
 
@@ -72,9 +80,23 @@ As you can see <b><i>BaseManager Class</i></b> follow this instructions:
 * Deleting new methods
 
 > As you know Python works with namespaces and Python interpreter searches keys with top to bottom approach
-so, we do not need to change the values of old methods. We need to add same key and new method value to the upper namespace
+so, we do not need to change the values of old methods. We need to add same key and new method value pair to the upper namespace
 
 <h3 align="center">Usage</h3>
 <h1 align="center"></h1>
 
+You can check ./example.ipynb for pseudo-usage
 
+<h3 align="center">Things to Do</h3>
+<h1 align="center"></h1>
+
+* Designing <b><i>BaseManager Class</i></b> for our good
+
+* Implementing code and tests
+
+* The Qiskit Experiment OSS Public Team has pretty valuable physicists and they use the Qiskit framework during daily tasks so they can identify
+small experiments or repetitive code chunks and can turn them into predefined classes so, our <b><i>BaseManager Class</i></b> can manage code chunks with ease
+
+* Preparing documentation for the new feature
+
+* Identifying new usage or implementation patterns born after implementation of <b><i>BaseManger Class</i></b> for future features and design patterns
