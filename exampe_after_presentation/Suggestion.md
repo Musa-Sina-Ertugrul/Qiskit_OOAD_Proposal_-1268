@@ -15,7 +15,7 @@
 
 <h5>About Me ( M.Sina Ertugrul ) </h5>
 
-> NOTE: I am an undergrad and I do not know the Qiskit framework and quantum programming as expected from an undergrad but, I have worked with
+> I am an undergrad and I do not know the Qiskit framework and quantum programming as expected from an undergrad but, I have worked with
 scientists during my internships ( One of Turkey's best bioinformatics research center ) and I know how scientists code, what their code looks like,
 how scientific codes can be repetitive or require small tasks
 
