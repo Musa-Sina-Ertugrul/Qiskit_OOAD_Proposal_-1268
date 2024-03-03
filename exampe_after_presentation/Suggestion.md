@@ -79,7 +79,7 @@ As you can see <b><i>BaseManager Class</i></b> follow this instructions:
 * Bounding new methods with object
 * Deleting new methods
 
-> As you know Python works with namespaces and Python interpreter searches keys with top to bottom approach
+> NOTE: As you know Python works with namespaces and Python interpreter searches keys with top to bottom approach
 so, we do not need to change the values of old methods. We need to add same key and new method value pair to the upper namespace
 
 <h3 align="center">Usage</h3>
