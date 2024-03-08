@@ -13,11 +13,6 @@
 <img width="250px" height="250px" src="https://github.com/Musa-Sina-Ertugrul/Qiskit_OOAD_Proposal_RFC0014/assets/102359522/90669ecd-eaca-4724-b97c-d98a7fb67aa6">
 </p>
 
-<h5>About Me ( M.Sina Ertugrul ) </h5>
-
-> I am an undergrad and I do not know the Qiskit framework and quantum programming as expected from an undergrad but, I have worked with
-scientists during my internships and I know how scientists code, what their code looks like, how scientific codes can be repetitive or require small tasks
-
 <h3 align="center">Introduction</h3>
 <h1 align="center"></h1>
 
